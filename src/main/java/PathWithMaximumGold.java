@@ -6,17 +6,17 @@ import java.util.*;
 public class PathWithMaximumGold {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-        int n= sc.nextInt();
         int m= sc.nextInt();
+        int n= sc.nextInt();
         int[][] grid= new int[m][n];
         for(int i=0; i<m; i++)
         {
-            for(int j=0; i<n; j++)
+            for(int j=0; j<n; j++)
                 grid[i][j]= sc.nextInt();
         }
         System.out.println(getMaximumGold(grid));
     }
-    public int getMaximumGold(int[][] grid) {
+    private static int getMaximumGold(int[][] grid) {
         int res=0;
         for(int i=0; i<grid.length; i++)
         {
@@ -28,7 +28,7 @@ public class PathWithMaximumGold {
         return res;
     }
 
-    int dfs(int[][] grid, int i, int j)
+    private static int dfs(int[][] grid, int i, int j)
     {
         if(!inBounds(grid, i, j))
             return 0;
@@ -42,10 +42,8 @@ public class PathWithMaximumGold {
         grid[i][j]=origin;
         return amt+origin;
     }
-    boolean inBounds(int[][] grid, int i, int j)
+    private static boolean inBounds(int[][] grid, int i, int j)
     {
-        if(i<0 || j<0 || i>=grid.length || j>=grid[i].length || grid[i][j]==0)
-            return false;
-        return true;
+        return i >= 0 && j >= 0 && i < grid.length && j < grid[i].length && grid[i][j] != 0;
     }
 }
