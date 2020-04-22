@@ -1,4 +1,4 @@
-// https://www.spoj.com/problems/PRIME1/
+package Unsolved;// https://www.spoj.com/problems/PRIME1/
 
 import java.io.IOException;
 import java.util.*;
