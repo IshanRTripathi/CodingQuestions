@@ -48,4 +48,12 @@ class Animal {
     public int hashCode() {
         return Objects.hash(animalName, animalAge);
     }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "animalName='" + animalName + '\'' +
+                ", animalAge=" + animalAge +
+                '}';
+    }
 }
