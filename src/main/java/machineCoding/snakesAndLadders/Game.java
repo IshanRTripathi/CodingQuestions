@@ -4,7 +4,43 @@ import main.java.machineCoding.snakesAndLadders.models.*;
 import main.java.machineCoding.snakesAndLadders.service.GameManager;
 
 import java.util.*;
+/*
+Input structure -
+Number of snakes
+All positions ( snake_head snake_tail ) and (head>tail)
 
+Number of ladders
+All positions( ladder_start ladder_end) and (start<end)
+
+Number of players
+All names of players
+
+Sample input:
+9
+62 5
+33 6
+49 9
+88 16
+41 20
+56 53
+98 64
+93 73
+95 75
+8
+2 37
+27 46
+10 32
+51 68
+61 79
+65 84
+71 91
+81 100
+4
+ishan
+rishu
+ayush
+dabbu
+ */
 public class Game {
     private Map<Integer, Snake> snakes;
     private Map<Integer, Ladder> ladders;
