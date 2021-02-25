@@ -1,4 +1,4 @@
-//Problem Question Link - https://leetcode.com/problems/minimum-area-rectangle/
+package main.java.otherCodingQuestions;//Problem Question Link - https://leetcode.com/problems/minimum-area-rectangle/
 
 import java.io.*;
 import java.util.*;

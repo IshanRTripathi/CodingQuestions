@@ -1,4 +1,4 @@
-/*
+package main.java.otherCodingQuestions;/*
 Question Link - hackerrank test
 not a complete solution
 see question in screenshots folder

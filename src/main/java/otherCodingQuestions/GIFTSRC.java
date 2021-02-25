@@ -1,4 +1,4 @@
-/* package codechef; // don't place package name! */
+package main.java.otherCodingQuestions;/* package codechef; // don't place package name! */
 //https://www.codechef.com/submit/GIFTSRC
 import java.util.*;
 import java.lang.*;

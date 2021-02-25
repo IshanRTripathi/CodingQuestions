@@ -1,3 +1,5 @@
+package main.java.otherCodingQuestions;
+
 import java.util.Scanner;
 
 //https://www.codechef.com/APRIL20B/problems/COVIDLQ

@@ -1,4 +1,4 @@
-/*
+package main.java.otherCodingQuestions;/*
 Question Link - https://practice.geeksforgeeks.org/problems/reach-a-given-score/0
 */
 

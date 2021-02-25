@@ -1,4 +1,4 @@
-//Problem Question Link - https://leetcode.com/problems/counting-bits/
+package main.java.otherCodingQuestions;//Problem Question Link - https://leetcode.com/problems/counting-bits/
 
 import java.io.*;
 import java.util.*;
