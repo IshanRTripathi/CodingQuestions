@@ -1,4 +1,4 @@
-package main.java;
+package main.java.otherCodingQuestions;
 
 import java.util.Scanner;
 

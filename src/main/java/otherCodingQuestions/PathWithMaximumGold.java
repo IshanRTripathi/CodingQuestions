@@ -1,4 +1,4 @@
-//Problem Question Link - https://leetcode.com/problems/path-with-maximum-gold/
+package main.java.otherCodingQuestions;//Problem Question Link - https://leetcode.com/problems/path-with-maximum-gold/
 
 import java.io.*;
 import java.util.*;

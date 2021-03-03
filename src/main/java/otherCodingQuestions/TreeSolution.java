@@ -1,4 +1,4 @@
-package main.java;
+package main.java.otherCodingQuestions;
 
 /*
 As we are all too tired from solving other problems, we'll skip the story and move

@@ -1,4 +1,4 @@
-/*
+package main.java.otherCodingQuestions;/*
 Question Link - https://leetcode.com/problems/rotate-image/
 */
 
