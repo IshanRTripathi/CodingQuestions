@@ -46,6 +46,8 @@ n == matrix[0].length
 2^-31 <= matrix[i][j] <= 2^31 - 1
 * */
 
+import main.java.customClass.Pair;
+
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -82,7 +84,7 @@ public class SetMatrixZeroes {
             }
         }
         for(Pair p: set){
-            int x= p.x, y=p.y;
+            int x= p.getX(), y=p.getY();
             for(int i=0; i<matrix.length; i++){
                 matrix[i][y]=0;
             }

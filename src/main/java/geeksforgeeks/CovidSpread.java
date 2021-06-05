@@ -2,6 +2,7 @@ package main.java.geeksforgeeks;
 
 import java.io.*;
 import java.util.*;
+import main.java.customClass.Pair;
 
 /*
 Link - https://practice.geeksforgeeks.org/problems/269f61832b146dd5e6d89b4ca18cbd2a2654ebbe/1/
@@ -77,8 +78,8 @@ class Solution{
         do{
             newInfected= new HashSet<>();
             for(Pair p: infected){
-                int x= p.x;
-                int y= p.y;
+                int x= p.getX();
+                int y= p.getY();
                 if(fresh.contains(new Pair(x+1, y))){
                     fresh.remove(new Pair(x+1, y));
                     newInfected.add(new Pair(x+1, y));
@@ -106,25 +107,5 @@ class Solution{
             return -1;
 
         return time-1;
-    }
-}
-class Pair{
-    int x,y;
-    Pair(int x, int y){
-        this.x= x;
-        this.y=y;
-    }
-
-    @Override
-    public boolean equals(Object o){
-        if(!(o instanceof Pair))
-            return false;
-        Pair p= (Pair) o;
-        return (this.x == p.x) && (this.y==p.y);
-    }
-
-    @Override
-    public int hashCode(){
-        return this.x+this.y;
     }
 }
