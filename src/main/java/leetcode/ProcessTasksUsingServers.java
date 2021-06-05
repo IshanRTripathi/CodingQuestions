@@ -57,7 +57,7 @@ Constraints:
 servers.length == n
 tasks.length == m
 1 <= n, m <= 2 * 105
-1 <= servers[i], tasks[j] <= 2 * 105
+1 <= servers[i], tasks[j] <= 2 * 10^5
 */
 
 import java.util.*;
@@ -73,67 +73,87 @@ public class ProcessTasksUsingServers {
     public int[] assignTasks(int[] servers, int[] tasks) {
 
         int[] res= new int[tasks.length];
-        PriorityQueue<ServerInfo> pq= new PriorityQueue<>((p1, p2) -> {
-            if (p1.getValue() == p2.getValue()) {
-                return p1.getKey() - p2.getKey();
-            }
-            return p1.getValue() - p2.getValue();
-        });
+        PriorityQueue<ServerInfo> allFreeServers= new PriorityQueue<>(
+                (p1, p2) ->
+                        (
+                                p1.getWeight()==p2.getWeight() ?
+                                p1.getName()-p2.getName():
+                                p1.getWeight()-p2.getWeight()
+                        )
+        );
         for(int i=0; i<servers.length; i++){
-            pq.add(new ServerInfo(i, servers[i]));
+            allFreeServers.add(new ServerInfo(i, servers[i]));
         }
-        System.out.println(pq);
+        System.out.println(allFreeServers);
 
-        List<ServerInfo> list= new ArrayList<>();
+        //List<ServerInfo> list= new ArrayList<>();
+        PriorityQueue<ServerInfo> busyServers= new PriorityQueue<>(
+                (p1, p2)->
+                        (
+                                p1.getnextfree()!=p2.getnextfree()?p1.getnextfree()-p2.getnextfree():
+                                        (p1.getWeight()!=p2.getWeight()?p1.getWeight()-p2.getWeight():p1.getName()- p2.getName())
+                        )
+        );
         for(int i=0; i<tasks.length; i++){
             ServerInfo server= null;
-            int time= 0; //server.getnextfree()+tasks[i];
-            //System.out.println("===========================");
-            while(true || pq.size()>0){
-                ServerInfo temp= pq.remove();
+            boolean gotAvailableServer= false;
+            while(true){
+                while(busyServers.size()>0 && busyServers.peek().getnextfree()<=i)
+                    allFreeServers.add(busyServers.poll());
+                ServerInfo temp= allFreeServers.poll();
+                System.out.println("\n\nCurrent time: "+i);
                 System.out.println("Checking server :"+temp);
-                list.add(temp);
+                busyServers.add(temp);
                 if(temp.getnextfree()>i){
-                    System.out.println("Server: "+temp.getKey()+" is busy");
-                    continue;
+                    System.out.println("Server: "+temp.getName()+" is busy, it'll be free at: "+temp.getnextfree());
+                    gotAvailableServer= false;
                 }
                 else{
-                    System.out.println("Server: "+temp.getKey()+" is available");
+                    System.out.println("Server: "+temp.getName()+" is available");
                     server= temp;
+                    gotAvailableServer= true;
                     break;
                 }
+
             }
-            if(list.size()>0){
-                //System.out.println("Before adding all"+ pq);
-                pq.addAll(list);
-                //System.out.println("After adding all"+ pq);
-                list= new ArrayList<>();
+            if(!gotAvailableServer){
+                System.out.println("Didn't get any available server so taking out from busy servers: "+busyServers);
+                server= busyServers.poll();
+                allFreeServers.add(server);
+            }
+            if(busyServers.size()>0){
+                while(busyServers.size()>0)
+                    allFreeServers.add(busyServers.poll());
             }
             System.out.println("Starting task "+i+" at time "+i);
-            server.setnextfree(i+tasks[i]);
-            System.out.println("Server: "+server.getKey()+" will be next free at: "+server.getnextfree());
+            server.setnextfree(server.getnextfree()+tasks[i]);
+            System.out.println("Server: "+server.getName()+" will be next free at: "+server.getnextfree());
             //System.out.println("New server config: "+server);
-            res[i]= server.getKey();
+            res[i]= server.getName();
+
+            System.out.println("Result so far: "+Arrays.toString(res));
         }
         return res;
     }
 }
 class ServerInfo{
-    int key, value, nextfree;
+    private final int name;
+    private final int weight;
+    private int nextfree;
 
-    ServerInfo(int key, int value){
-        this.key= key;
-        this.value= value;
+    ServerInfo(int name, int weight){
+        this.name = name;
+        this.weight = weight;
         nextfree=0;
     }
 
-    int getKey(){ return key; }
-    int getValue(){ return value; }
+    int getName(){ return name; }
+    int getWeight(){ return weight; }
     void setnextfree(int t){ this.nextfree= t; }
     int getnextfree(){ return nextfree; }
 
     @Override
     public String toString(){
-        return "{sever: "+key+", weight: "+value+", nextfree: "+nextfree+"}\n";
+        return "\n{sever: "+ name +", weight: "+ weight +", nextfree: "+nextfree+"}";
     }
 }

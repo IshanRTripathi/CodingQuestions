@@ -1,5 +1,7 @@
 package main.java.leetcode;
 
+import main.java.customClass.Pair;
+
 import java.util.*;
 /*
 Link - https://leetcode.com/problems/shortest-path-in-binary-matrix/
@@ -62,23 +64,23 @@ public class ShortestPathInBinaryMatrix {
             visited.add(temp);
             System.out.println("Visited co-ordinate : "+temp);
 
-            if(temp.x==grid.length-1 && temp.y==grid[0].length-1)
+            if(temp.getX()==grid.length-1 && temp.getY()==grid[0].length-1)
                 return res+1;
 
-            queue.add(new Pair(temp.x+1, temp.y));
-            queue.add(new Pair(temp.x-1, temp.y));
-            queue.add(new Pair(temp.x+1, temp.y+1));
-            queue.add(new Pair(temp.x-1, temp.y+1));
-            queue.add(new Pair(temp.x+1, temp.y-1));
-            queue.add(new Pair(temp.x-1, temp.y-1));
-            queue.add(new Pair(temp.x, temp.y+1));
-            queue.add(new Pair(temp.x, temp.y-1));
+            queue.add(new Pair(temp.getX()+1, temp.getY()));
+            queue.add(new Pair(temp.getX()-1, temp.getY()));
+            queue.add(new Pair(temp.getX()+1, temp.getY()+1));
+            queue.add(new Pair(temp.getX()-1, temp.getY()+1));
+            queue.add(new Pair(temp.getX()+1, temp.getY()-1));
+            queue.add(new Pair(temp.getX()-1, temp.getY()-1));
+            queue.add(new Pair(temp.getX(), temp.getY()+1));
+            queue.add(new Pair(temp.getX(), temp.getY()-1));
         }
         return -1;
     }
 
     private static boolean checkUnderConstraints(Pair temp, int[][] grid) {
-        return temp.x>=0 && temp.y<grid[0].length && temp.x<grid.length && temp.y>=0 && grid[temp.x][temp.y]==0;
+        return temp.getX()>=0 && temp.getY()<grid[0].length && temp.getX()<grid.length && temp.getY()>=0 && grid[temp.getX()][temp.getY()]==0;
     }
 
 }
