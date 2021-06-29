@@ -1,7 +1,7 @@
 package main.java.leetcode;
 /*
 * link: https://leetcode.com/problems/check-if-word-equals-summation-of-two-words/
-*/
+*/ 
 
 public class CheckIfWordEqualsSummationOfTwoWords {
     public static void main(String[] args) {
