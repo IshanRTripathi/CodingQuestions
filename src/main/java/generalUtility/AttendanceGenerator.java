@@ -31,7 +31,7 @@ public class AttendanceGenerator {
         for(LocalDate date: dates) {
             if(date.getDayOfWeek()== DayOfWeek.SATURDAY || date.getDayOfWeek()== DayOfWeek.SUNDAY)
                 continue;
-            result.append(date).append(",09:00:00,18:00:00,Work from home,NO\n");
+            result.append(date).append(",09:00:00,18:00:00,work from home,NO\n");
         }
         printWriter.print(result.substring(0, result.length()-1));
         printWriter.close();
