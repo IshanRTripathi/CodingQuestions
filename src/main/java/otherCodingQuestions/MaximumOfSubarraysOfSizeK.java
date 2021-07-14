@@ -15,32 +15,32 @@ public class MaximumOfSubarraysOfSizeK
     static void printMax(int arr[], int n, int k)
     {
 
-        // Create a Double Ended Queue, Qi
+        // Create a Double Ended Queue, deque
         // that will store indexes of array elements
         // The queue will store indexes of
         // useful elements in every window and it will
         // maintain decreasing order of values
-        // from front to rear in Qi, i.e.,
-        // arr[Qi.front[]] to arr[Qi.rear()]
+        // from front to rear in deque, i.e.,
+        // arr[deque.front[]] to arr[deque.rear()]
         // are sorted in decreasing order
-        Deque<Integer> Qi = new LinkedList<Integer>();
+        Deque<Integer> deque = new LinkedList<Integer>();
 
 		/* Process first k (or first window)
 		elements of array */
         int i;
         for (i = 0; i < k; ++i)
         {
-            System.out.println(Qi);
+            System.out.println(deque);
             // For every element, the previous
             // smaller elements are useless so
-            // remove them from Qi
-            while (!Qi.isEmpty() && arr[i] >= arr[Qi.peekLast()]) {
+            // remove them from deque
+            while (!deque.isEmpty() && arr[i] >= arr[deque.peekLast()]) {
                 // Remove from rear
-                Qi.removeLast();
+                deque.removeLast();
             }
 
             // Add new element at rear of queue
-            Qi.addLast(i);
+            deque.addLast(i);
         }
 
         // Process rest of the elements,
@@ -51,26 +51,26 @@ public class MaximumOfSubarraysOfSizeK
             // The element at the front of the
             // queue is the largest element of
             // previous window, so print it
-            System.out.print(arr[Qi.peek()] + " ");
+            System.out.print(arr[deque.peek()] + " ");
 
             // Remove the elements which
             // are out of this window
-            while ((!Qi.isEmpty()) && Qi.peek() <= i - k)
-                Qi.removeFirst();
+            while ((!deque.isEmpty()) && deque.peek() <= i - k)
+                deque.removeFirst();
 
             // Remove all elements smaller
             // than the currently
             // being added element (remove
             // useless elements)
-            while ((!Qi.isEmpty()) && arr[i] >= arr[Qi.peekLast()])
-                Qi.removeLast();
+            while ((!deque.isEmpty()) && arr[i] >= arr[deque.peekLast()])
+                deque.removeLast();
 
-            // Add current element at the rear of Qi
-            Qi.addLast(i);
+            // Add current element at the rear of deque
+            deque.addLast(i);
         }
 
         // Print the maximum element of last window
-        System.out.print(arr[Qi.peek()]);
+        System.out.print(arr[deque.peek()]);
     }
 
     // Driver code
