@@ -8,18 +8,22 @@ public class ATMDispenser {
         System.out.println("Dispensing "+amt);
 
         PriorityQueue<Note> atmNotes= new PriorityQueue<>((a, b)->{
-            return (b.getValue()*b.getCount()) - (a.getValue()*a.getCount());
+            if(a.getTotalWeight()==b.getTotalWeight()){
+                return b.getCount()-a.getCount();
+            }
+            return (b.getTotalWeight()) - (a.getTotalWeight());
         });
-        atmNotes.add(new Note(2000, 2));
+        atmNotes.add(new Note(2000, 0));
         atmNotes.add(new Note(500, 4));
         atmNotes.add(new Note(200, 11));
         atmNotes.add(new Note(100, 8));
 
         int result= dispenseNotes(amt, atmNotes);
-
+        System.out.println(result==1? "Dispensed total amount success": "Unsuccessful");
     }
 
-    private static int dispenseNotes(int amt, PriorityQueue<Note> atmNotes) {
+    public static int dispenseNotes(int amt, PriorityQueue<Note> atmNotes) {
+        System.out.println(atmNotes);
         List<Note> tempNotes= new ArrayList<>();
         int sumDispensedSoFar=0;
         Map<Integer, Integer> dispensedDimensions= new HashMap<>();
@@ -34,8 +38,9 @@ public class ATMDispenser {
                 amt-= curr.getValue();
                 sumDispensedSoFar+= curr.getValue();
                 dispensedDimensions.put(curr.getValue(), dispensedDimensions.getOrDefault(curr.getValue(), 0)+1);
-//                System.out.println("Dispensed : "+curr.getValue());
+                System.out.println("Dispensed : "+curr.getValue()+" , remaining: "+amt);
                 atmNotes.addAll(tempNotes);
+                System.out.println("Updated dimensions: "+atmNotes);
                 tempNotes= new ArrayList<>();
             }
         }
@@ -48,28 +53,3 @@ public class ATMDispenser {
     }
 }
 
-class Note {
-    private int value;
-    private int count;
-
-    public Note(int value, int count) {
-        this.value = value;
-        this.count = count;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-}
